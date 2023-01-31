@@ -40,28 +40,28 @@ class DataFile:
         # print( type(matrix['antindf']))
         # print( matrix['azimuth'].shape)
 
-        data_dic['antindf']      = matrix['antindf']
-        data_dic['azimuth']      = matrix['azimuth']
-        data_dic['clock_oddity'] = matrix['clock_oddity']
-        data_dic['delspread']    = matrix['delspread']
-        data_dic['doppler']      = matrix['doppler']
-        data_dic['dopsindex']    = matrix['dopsindex']
-        data_dic['dopspread']    = matrix['dopspread']
-        data_dic['elevation']    = matrix['elevation']
+        data_dic['antindf']      = matrix['antindf'].ravel()
+        data_dic['azimuth']      = matrix['azimuth'].ravel()
+        data_dic['clock_oddity'] = matrix['clock_oddity'].ravel()
+        data_dic['delspread']    = matrix['delspread'].ravel()
+        data_dic['doppler']      = matrix['doppler'].ravel()
+        data_dic['dopsindex']    = matrix['dopsindex'].ravel()
+        data_dic['dopspread']    = matrix['dopspread'].ravel()
+        data_dic['elevation']    = matrix['elevation'].ravel()
         data_dic['hires_az']     = matrix['hires_az']
         data_dic['hires_el']     = matrix['hires_el']
         data_dic['hires_pow']    = matrix['hires_pow']
         data_dic['hires_tof']    = matrix['hires_tof']
         data_dic['ITUdelspr']    = matrix['ITUdelspr']
         data_dic['ITUmps']       = matrix['ITUmps']
-        data_dic['mpspread']     = matrix['mpspread']
-        data_dic['numant']       = matrix['numant']
-        data_dic['peaktome']     = matrix['peaktomean']
-        data_dic['sigpow']       = matrix['sigpow']
-        data_dic['snr']          = matrix['snr']
-        data_dic['snr_dd']       = matrix['snr_dd']
+        data_dic['mpspread']     = matrix['mpspread'].ravel()
+        data_dic['numant']       = matrix['numant'].ravel()
+        data_dic['peaktome']     = matrix['peaktomean'].ravel()
+        data_dic['sigpow']       = matrix['sigpow'].ravel()
+        data_dic['snr']          = matrix['snr'].ravel()
+        data_dic['snr_dd']       = matrix['snr_dd'].ravel()
         data_dic['TIME_DELAY']   = matrix['TIME_DELAY']
-        data_dic['timeday']      = matrix['timeday']
+        data_dic['timeday']      = matrix['timeday'].ravel()
         data_dic['tofazim']      = matrix['tofazim']
         data_dic['tofedaz']      = matrix['tofedaz']
         data_dic['tofedel']      = matrix['tofedel']
