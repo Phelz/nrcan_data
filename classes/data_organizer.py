@@ -30,7 +30,8 @@ class DataOrganizer:
             q, r = divmod(freq, 1)
             self.data_dic[freq] = load_object("data\\%4d\\%4d_%dp%.4d.dat" % ( self.year, self.year, q, np.round(r,5)*1e4))
             
-            
+        
+        self.time_keeper = {}
         
     def sort_data_availability(self, freq):
         
@@ -59,6 +60,8 @@ class DataOrganizer:
 
         time_diff_there = np.subtract( time_keeper[1::2], time_keeper[::2] )
         time_diff_notthere = np.subtract( time_keeper[::2][1:], time_keeper[1::2][:-1] )
+
+        self.time_keeper[freq] = time_keeper, odd_days, time_diff_there.sum() + timedelta(days=len(odd_days))
 
         return time_list, time_keeper, time_diff_there, time_diff_notthere, odd_days
 
@@ -116,4 +119,11 @@ class DataOrganizer:
         fig.suptitle("Data Availability %s" % (self.year), va="top", x=0.5, y=1)
         
         return fig, axs
+    
+    def find_freq_max_days(self):
+        
+        if self.time_keeper == {}:
+            self.show_data_availability()
+        
+        return  max(self.time_keeper, key=lambda k:self.time_keeper[k][-1])
         
