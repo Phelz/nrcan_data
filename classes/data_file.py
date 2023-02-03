@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from scipy.io import loadmat, savemat
+from scipy import interpolate
 import numpy as np
 
 from dataclasses import dataclass
@@ -22,6 +23,13 @@ class DataFile:
 
         q, r = divmod(int(separated_path[-1].replace(".mat", "")), int(10e5))
         self.frequency = q + r/int(10e5) 
+        
+        norm = np.linspace(0, 1, endpoint=True, num=1000)
+        norm_day = np.linspace(0, 24, endpoint=True, num=1000)
+
+        f =  interpolate.interp1d( norm, norm_day  )
+
+        self.time_arr = f(np.vectorize(self.strip_day_from_time)(self.data_dic['timeday']))
 
 
     def read_file(self):
@@ -62,5 +70,6 @@ class DataFile:
         return data_dic
 
 
+    def strip_day_from_time(self, day_time):
 
-
+        return day_time - np.floor(day_time)

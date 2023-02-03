@@ -112,7 +112,6 @@ class DataOrganizer:
         
         for i, (freq, ax) in enumerate( zip(self.frequencies, axs) ):
             
-            
             time_list, time_keeper, time_diff_there, time_diff_notthere, odd_days = self.sort_data_availability( freq )
             self.plot_data_availability(freq, time_list, time_keeper, time_diff_there, time_diff_notthere, odd_days, ax, legend=True if i==0 else False )
 
