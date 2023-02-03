@@ -1,7 +1,6 @@
-import os, sys, glob, shutil
+import os, glob, shutil
 from time import sleep
 
-from datetime import datetime, timedelta
 from concurrent.futures import ProcessPoolExecutor as ppe
 
 CURR_DIR = os.getcwd()
@@ -13,7 +12,6 @@ separated_list = [ glob.glob("%s\\*_%4d*" % (DATA_FOLDER, year) ) for year in ra
 def move_file(file):
 
     year_str = file.split("\\")[-1].split("_")[-2][:4]
-    dir_name = "%s\\%s" % (DATA_FOLDER, year_str)
 
     new_path = file.replace(DATA_FOLDER, "%s\\%s\\" % (DATA_FOLDER, year_str))
     if not os.path.isfile( new_path ):

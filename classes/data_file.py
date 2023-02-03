@@ -1,17 +1,9 @@
-import os, sys, glob, gc
-
-from datetime import datetime, timedelta
-from time import sleep
+from datetime import datetime
 
 from scipy.io import loadmat, savemat
 import numpy as np
 
 from dataclasses import dataclass
-
-# @dataclass
-# class DataOrganizer:
-
-#     datafiles: list = []
 
 @dataclass
 class DataFile:
@@ -36,9 +28,6 @@ class DataFile:
 
         data_dic = {}
         matrix = loadmat(self.file_path)
-
-        # print( type(matrix['antindf']))
-        # print( matrix['azimuth'].shape)
 
         data_dic['antindf']      = matrix['antindf'].ravel()
         data_dic['azimuth']      = matrix['azimuth'].ravel()
@@ -69,27 +58,9 @@ class DataFile:
         data_dic['toflight']     = matrix['toflight']
         data_dic['tofmode']      = matrix['tofmode']
 
-        # matrix = []; gc.collect()
 
         return data_dic
 
 
-
-
-
-
-    # def read_file(self):
-
-    #     data_dic = {}
-    #     matrix = loadmat(self.file_path)
-
-    #     # print( type(matrix['antindf']))
-    #     # print( matrix['azimuth'])
-
-    #     data_dic = {'antindf' : matrix['antindf'], 'timeday' : matrix['timeday'][:, :]}
-        
-    #     matrix = []; gc.collect()
-
-    #     return data_dic
 
 

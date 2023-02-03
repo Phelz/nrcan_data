@@ -1,36 +1,18 @@
-import os, sys, glob, gc
+import os, sys, glob
 
-from datetime import datetime, timedelta
-import numpy as np
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
 
-from read_matlab_data import DataFile
-import pickle
-
-# Saving object
-def write_object(file_name, obj):
-
-    with open(file_name, 'wb') as o:
-    
-        pickle.dump(obj, o)
-
-# Loading object
-def load_object(file_name):
-
-    with open(file_name, 'rb') as o:
-
-        loaded_object = pickle.load(o)
-
-    return loaded_object
+from classes import DataFile
+from utils import write_object
 
 CURR_DIR = os.getcwd()
 DATA_FOLDER = "%s\\matlab_files\\" % (CURR_DIR)
-
 
 folder_list = glob.glob("%s\\*" % (DATA_FOLDER))
 separated_file_list = [ glob.glob("%s\\*" % (folder)) for folder in folder_list  ] 
 
 nrcan_frequencies = [ 5.382, 6.9285, 8.0995, 10.422, 11.107, 14.3644 ]
-
 
 if __name__ == "__main__":
 
