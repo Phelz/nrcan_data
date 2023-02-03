@@ -59,7 +59,7 @@ class DataOrganizer:
 
         time_diff_there = np.subtract( time_keeper[1::2], time_keeper[::2] )
         time_diff_notthere = np.subtract( time_keeper[::2][1:], time_keeper[1::2][:-1] )
-       
+
         return time_list, time_keeper, time_diff_there, time_diff_notthere, odd_days
 
     def plot_data_availability(self, freq, time_list, time_keeper, time_diff_there, time_diff_notthere, odd_days, ax, legend=False):
@@ -71,8 +71,8 @@ class DataOrganizer:
         ax.xaxis.set_minor_locator(mdates.DayLocator(bymonthday=[0, 7, 14, 21, 28]))
         ax.xaxis.set_minor_formatter(mdates.DateFormatter("%d"))
 
-        ax.xaxis.set_tick_params(which="minor", labelsize="15", labelcolor="gray", rotation=0 )
-        ax.xaxis.set_tick_params(which="major", labelsize="15", labelcolor="k", rotation=30 , pad=20)
+        ax.xaxis.set_tick_params(which="minor", labelsize="20", length=7, labelcolor="gray", rotation=0, top=False, direction='out' )
+        ax.xaxis.set_tick_params(which="major", labelsize="20", length=7, labelcolor="k", rotation=30 , pad=20, top=False, direction='out')
 
         for time in time_keeper:
             ax.annotate( time.day, (time - timedelta(hours=12), 1.05), fontsize=15, color = "gray",  xycoords='data', xytext=(1, 1), textcoords="offset points", annotation_clip=False, zorder=13, transform=ax.transData)
@@ -97,9 +97,11 @@ class DataOrganizer:
         ax.set_ylabel(  "%.4f MHz" % (freq), fontsize=15 )
         ax.margins(y=0)
         
+        ax.grid(False, which='both')
+        
         if legend:
             legend_elements = [ Patch(facecolor=color, edgecolor='k', label=label) for color, label in zip(self.colors, ["Not Available", "Available"]) ]
-            ax.legend(handles=legend_elements,  prop={'size': 12},  bbox_to_anchor=(1, 2 ), fancybox=True, shadow=True)
+            ax.legend(handles=legend_elements,  prop={'size': 12},  bbox_to_anchor=(1, 2.1 ), fancybox=True, shadow=True)
         
     
     def show_data_availability(self):
