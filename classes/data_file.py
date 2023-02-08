@@ -27,9 +27,10 @@ class DataFile:
         norm = np.linspace(0, 1, endpoint=True, num=1000)
         norm_day = np.linspace(0, 24, endpoint=True, num=1000)
 
-        f =  interpolate.interp1d( norm, norm_day  )
-
-        self.time_arr = f(np.vectorize(self.strip_day_from_time)(self.data_dic['timeday']))
+        f =  interpolate.interp1d( norm, norm_day )
+        
+        self.time_arr_norm = np.vectorize(self.strip_day_from_time)(self.data_dic['timeday'])
+        self.time_arr = f(self.time_arr_norm)
 
 
     def read_file(self):
@@ -63,9 +64,8 @@ class DataFile:
         data_dic['tofedaz']      = matrix['tofedaz']
         data_dic['tofedel']      = matrix['tofedel']
         data_dic['tofelev']      = matrix['tofelev']
-        data_dic['toflight']     = matrix['toflight']
+        data_dic['toflight']     = matrix['toflight'].ravel()
         data_dic['tofmode']      = matrix['tofmode']
-
 
         return data_dic
 
